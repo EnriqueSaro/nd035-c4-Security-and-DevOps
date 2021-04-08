@@ -12,30 +12,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.net.URI;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private JacksonTester<CreateUserRequest> json;
 
     private UserController userController;
 
@@ -132,26 +119,4 @@ public class UserControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(HttpStatus.NOT_FOUND.value());
 
     }
-
-//    @Test
-//    public void login_happy_path() throws Exception {
-//
-//        CreateUserRequest request = new CreateUserRequest();
-//        request.setUsername("test");
-//        request.setPassword("testPassword");
-//
-//        User user = new User();
-//        user.setUsername(request.getUsername());
-//        user.setPassword(request.getPassword());
-//
-//        Mockito.when(bCryptPasswordEncoder.encode("testPassword")).thenReturn("testPassword");
-//        Mockito.when(userRepository.findByUsername(request.getUsername())).thenReturn(user);
-//
-//        mockMvc.perform(
-//                MockMvcRequestBuilders.post(new URI("/login"))
-//                        .content(json.write(request).getJson())
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//    }
 }
